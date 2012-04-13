@@ -13,13 +13,7 @@ _A fork of John Dyer's awesome MediaElement, but with more lightness._
 ### 1. Add Script anywhere in the page (preferably last)
 
 	<script src="jquery.js"></script>
-	<script>
-		if( $('video').length > 0 ){
-			$('<script>')
-				.attr('src', 'mediaelement.min.js')
-				.appendTo( 'body' )
-		}
-	</script>
+	<script src="mediaelement.min.js"></script>
 
 ### 2. Option A: Single H.264 file
 
