@@ -64,22 +64,22 @@ With this method, the video script won't load unless there are videos on the pag
 The events are bound to the original element, so you only have to look in one place for events to be raised. It's that simple!
 
 _Events that the flash player calls:_
-loadeddata
-progress
-timeupdate
-seeked
-play
-playing
-pause
-loadedmetadata
-ended
-volumechange
-stop
-loadstart
-canplay
-loadeddata
-seeking
-fullscreenchange
+`loadeddata`
+`progress`
+`timeupdate`
+`seeked`
+`play`
+`playing`
+`pause`
+`loadedmetadata`
+`ended`
+`volumechange`
+`stop`
+`loadstart`
+`canplay`
+`loadeddata`
+`seeking`
+`fullscreenchange`
 	
 
 ## How it Works: 
