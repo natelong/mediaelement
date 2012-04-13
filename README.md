@@ -1,5 +1,5 @@
 # `<video>` made easy. One file. Any browser. Light as hell.
-## A fork of John Dyer's awesome MediaElement, but with more lightness.
+_A fork of John Dyer's awesome MediaElement, but with more lightness._
 
 ## MediaElement Stats
 * Author: John Dyer [http://j.hn/](http://j.hn/)
