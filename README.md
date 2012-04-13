@@ -1,25 +1,27 @@
-# `<video>` and `<audio>` made easy. One file. Any browser. Same UI.
+# `<video>` made easy. One file. Any browser. Light as hell.
+## A fork of John Dyer's awesome MediaElement, but with more lightness.
 
+## MediaElement Stats
 * Author: John Dyer [http://j.hn/](http://j.hn/)
 * Website: [http://mediaelementjs.com/](http://mediaelementjs.com/)
+* GitHub Repo: [http://github.com/johndyer/mediaelement](http://github.com/johndyer/mediaelement)
 * License: GPLv2/MIT
-* Meaning: Please use this everywhere and it'd be swell if you'd 
-link back here.
-* Thanks: my employer, [Dallas Theological Seminary](http://www.dts.edu/)
-* Contributors: [mikesten](https://github.com/mikesten), [sylvinus](https://github.com/sylvinus), [mattfarina](https://github.com/mattfarina), [romaninsh](https://github.com/romaninsh), [fmalk](https://github.com/fmalk), [jeffrafter](https://github.com/jeffrafter), [sompylasar](https://github.com/sompylasar), [andyfowler](https://github.com/andyfowler), [RobRoy](https://github.com/RobRoy), [jakearchibald](https://github.com/jakearchibald), [seanhellwig](https://github.com/seanhellwig), [CJ-Jackson](https://github.com/CJ-Jackson), [kaichen](https://github.com/kaichen), [gselva](https://github.com/gselva), [erktime](https://github.com/erktime), [bradleyboy](https://github.com/bradleyboy), [kristerkari](https://github.com/kristerkari), [rmhall](https://github.com/rmhall), [tantalic](https://github.com/tantalic), [madesign](http://github.com/madesign), [aschempp](http://github.com/aschempp), [gavinlynch](https://github.com/gavinlynch), [Birol2010](http://github.com/Birol2010)
-
+* Meaning: Please use this everywhere and it'd be swell if you'd link back here.
 
 ## Installation and Usage
 
-_MediaElementPlayer: HTML5 `<video>` and `<audio>` player_
+_MediaElementPlayer: HTML5 `<video>` player_
 
-A complete HTML/CSS audio/video player built on top `MediaElement.js` and `jQuery`. Many great HTML5 players have a completely separate Flash UI in fallback mode, but MediaElementPlayer.js uses the same HTML/CSS for all players.
-
-### 1. Add Script and Stylesheet
+### 1. Add Script anywhere in the page (preferably last)
 
 	<script src="jquery.js"></script>
-	<script src="mediaelement-and-player.min.js"></script>
-	<link rel="stylesheet" href="mediaelementplayer.css" />
+	<script>
+		if( $('video').length > 0 ){
+			$('<script>')
+				.attr('src', 'mediaelement.min.js')
+				.appendTo( 'body' )
+		}
+	</script>
 
 ### 2. Option A: Single H.264 file
 
@@ -36,40 +38,60 @@ This includes multiple codecs for various browsers (H.264 for IE and Safari, Web
 		<source type="video/webm" src="myvideo.webm" />
 		<source type="video/ogg" src="myvideo.ogv" />
 		<object width="320" height="240" type="application/x-shockwave-flash" data="flashmediaelement.swf">
-			<param name="movie" value="flashmediaelement.swf" /> 
-			<param name="flashvars" value="controls=true&amp;poster=myvideo.jpg&amp;file=myvideo.mp4" /> 		
+			<param name="movie" value="flashmediaelement.swf" />
+			<param name="flashvars" value="controls=true&amp;poster=myvideo.jpg&amp;file=myvideo.mp4" /> 
 			<img src="myvideo.jpg" width="320" height="240" title="No video playback capabilities" />
 		</object>
 	</video>
 
-### 3. Run startup script
+### 3. Kick back and enjoy the show!
 
-Make sure this is not in the `<head>` tag or iOS 3 will fail.
+## Advanced Techniques
 
+### Asynchronous Script Loading
+
+	<script src="jquery.js"></script>
 	<script>
-	// jQuery method
-	$('video').mediaelementplayer();
+		if( $('video').length > 0 ){
+			$('<script>')
+				.attr('src', 'mediaelement.min.js')
+				.appendTo( 'body' )
+		}
 	</script>
-	
+
+With this method, the video script won't load unless there are videos on the page, and it will mark up those videos with a flash player if necessary. If the browser supports videos natively, then the script will leave them untouched so you can enjoy them in their default chrome. You can always add your own style and whatnot, but why?
+
+### Analytics Tracking
+
 	<script>
-	// normal JavaScript 
-	var player = new MediaElementPlayer('#player');
-	</script>	
+		$( 'video' ).on( 'play',function(){
+			// track the event with your tracker of choice here
+		});
+	</script>
+
+The events are bound to the original element, so you only have to look in one place for events to be raised. It's that simple!
+
+_Events that the flash player calls:_
+loadeddata
+progress
+timeupdate
+seeked
+play
+playing
+pause
+loadedmetadata
+ended
+volumechange
+stop
+loadstart
+canplay
+loadeddata
+seeking
+fullscreenchange
+	
 
 ## How it Works: 
-_MediaElement.js: HTML5 `<video>` and `<audio>` shim_
+_MediaElement.js: HTML5 `<video>` shim_
 
-`MediaElement.js` is a set of custom Flash and Silverlight plugins that mimic the HTML5 MediaElement API for browsers that don't support HTML5 or don't support the media codecs you're using. 
-Instead of using Flash as a _fallback_, Flash is used to make the browser seem HTML5 compliant and enable codecs like H.264 (via Flash) and even WMV (via Silverlight) on all browsers.
-
-	<script src="mediaelement.js"></script>
-	<video src="myvideo.mp4" width="320" height="240"></video>
-	
-	<script>
-	var v = document.getElementsByTagName("video")[0];
-	new MediaElement(v, {success: function(media) {
-		media.play();
-	}});
-	</script>
-
-You can use this as a standalone library if you wish, or just stick with the full MediaElementPlayer.
+`MediaElement.js` is a set of custom Flash plugins that mimic the HTML5 MediaElement API for browsers that don't support HTML5 or don't support the media codecs you're using. 
+Instead of using Flash as a _fallback_, Flash is used to make the browser seem HTML5 compliant and enable codecs like H.264 (via Flash) on all browsers.
