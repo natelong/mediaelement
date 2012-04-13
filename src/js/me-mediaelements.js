@@ -136,29 +136,8 @@ mejs.PluginMediaElement.prototype = {
 			this.paused = true;
 		}
 	},
-	canPlayType: function(type) {
-		var i,
-			j,
-			pluginInfo,
-			pluginVersions = mejs.plugins[this.pluginType];
-
-		for (i=0; i<pluginVersions.length; i++) {
-			pluginInfo = pluginVersions[i];
-
-			// test if user has the correct plugin version
-			if (mejs.PluginDetector.hasPluginVersion(this.pluginType, pluginInfo.version)) {
-
-				// test for plugin playback types
-				for (j=0; j<pluginInfo.types.length; j++) {
-					// find plugin that can play the type
-					if (type == pluginInfo.types[j]) {
-						return true;
-					}
-				}
-			}
-		}
-
-		return false;
+	canPlayType: function( type ){
+		return $.inArray( type, mejs.flashInfo.types ) > 0;
 	},
 	
 	positionFullscreenButton: function(x,y,visibleAndAbove) {
@@ -179,21 +158,7 @@ mejs.PluginMediaElement.prototype = {
 	// This can be a url string
 	// or an array [{src:'file.mp4',type:'video/mp4'},{src:'file.webm',type:'video/webm'}]
 	setSrc: function (url) {
-		if (typeof url == 'string') {
-			this.pluginApi.setSrc(mejs.Utility.absolutizeUrl(url));
-			this.src = mejs.Utility.absolutizeUrl(url);
-		} else {
-			var i, media;
-
-			for (i=0; i<url.length; i++) {
-				media = url[i];
-				if (this.canPlayType(media.type)) {
-					this.pluginApi.setSrc(mejs.Utility.absolutizeUrl(media.src));
-					this.src = mejs.Utility.absolutizeUrl(url);
-				}
-			}
-		}
-
+		this.src = url;
 	},
 	setCurrentTime: function (time) {
 		if (this.pluginApi != null) {
@@ -317,9 +282,5 @@ mejs.PluginMediaElement.prototype = {
 	},
 	setAttribute: function(name, value){
 		this.attributes[name] = value;
-	},
-
-	remove: function() {
-		mejs.Utility.removeSwf(this.pluginElement.id);
 	}
 };
