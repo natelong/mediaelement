@@ -10,8 +10,6 @@ _A fork of John Dyer's awesome MediaElement, but with more lightness._
 
 ## Installation and Usage
 
-_MediaElementPlayer: HTML5 `<video>` player_
-
 ### 1. Add Script anywhere in the page (preferably last)
 
 	<script src="jquery.js"></script>
@@ -91,7 +89,7 @@ fullscreenchange
 	
 
 ## How it Works: 
-_MediaElement.js: HTML5 `<video>` shim_
+`MediaElement.js` HTML5 `<video>` shim
 
 `MediaElement.js` is a set of custom Flash plugins that mimic the HTML5 MediaElement API for browsers that don't support HTML5 or don't support the media codecs you're using. 
 Instead of using Flash as a _fallback_, Flash is used to make the browser seem HTML5 compliant and enable codecs like H.264 (via Flash) on all browsers.
