@@ -29,11 +29,10 @@ mejs.MediaPluginBridge = {
 	// http://www.whatwg.org/specs/web-apps/current-work/multipage/video.html
 	fireEvent: function( id, eventName, values ){
 
-		var
-			e,
-			i,
-			bufferedTime,
-			pluginMediaElement = this.pluginMediaElements[id];
+		var e;
+		var i;
+		var bufferedTime;
+		var pluginMediaElement = this.pluginMediaElements[id];
 
 		pluginMediaElement.ended = false;
 		pluginMediaElement.paused = true;
@@ -279,6 +278,8 @@ mejs.HtmlMediaElementShim = {
 		var node;
 		var initVars;
 
+		htmlMediaElement.currentSrc = mejs.utility.absolutizeUrl( playback.url );
+
 		// copy tagName from html media element
 		pluginMediaElement.tagName = htmlMediaElement.tagName
 
@@ -373,5 +374,3 @@ mejs.HtmlMediaElementShim = {
 		return pluginMediaElement;
 	}
 };
-
-window.MediaElement = mejs.MediaElement;
