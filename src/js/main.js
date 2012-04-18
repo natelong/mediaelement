@@ -1,5 +1,6 @@
 #include "me-header.js"
 #include "me-namespace.js"
+#include "me-utility.js"
 #include "me-plugindetector.js"
 #include "me-featuredetection.js"
 #include "me-mediaelements-lite.js"
