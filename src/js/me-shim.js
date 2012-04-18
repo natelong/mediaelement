@@ -32,7 +32,8 @@ mejs.MediaPluginBridge = {
 		var e;
 		var i;
 		var bufferedTime;
-		var pluginMediaElement = this.pluginMediaElements[id];
+		var pluginMediaElement = this.pluginMediaElements[ id ];
+		var htmlMediaElement = this.htmlMediaElements[ id ]
 
 		pluginMediaElement.ended = false;
 		pluginMediaElement.paused = true;
@@ -44,7 +45,7 @@ mejs.MediaPluginBridge = {
 		};
 
 		// attach all values to element and event object
-		for (i in values) {
+		for( i in values ){
 			pluginMediaElement[i] = values[i];
 			e[i] = values[i];
 		}
@@ -62,7 +63,12 @@ mejs.MediaPluginBridge = {
 			length: 1
 		};
 
-		pluginMediaElement.dispatchEvent(e.type, e);
+		pluginMediaElement.dispatchEvent( e.type, e );
+
+		if( e.type === 'timeupdate' ){
+			htmlMediaElement.currentTime = e.currentTime;
+			htmlMediaElement.duration = e.duration;
+		}
 	}
 };
 
