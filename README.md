@@ -21,7 +21,18 @@ If your users have JavaScript and Flash, this is the easist route for all browse
 	
 	<video src="myvideo.mp4" width="320" height="240"></video>
 
-### 2. Option B: Multiple codecs with Flash fall-through when JavaScript is disabled
+### 2. Option B: Middle Ground
+
+If your users have JavaScript and Flash, but you want to serve native formats and have a decent fallback, do this:
+	
+	<video src="myvideo.mp4" width="320" height="240">
+		<source type="video/mp4" src="myvideo.mp4" />
+		<source type="video/webm" src="myvideo.webm" />
+		<source type="video/ogg" src="myvideo.ogv" />
+		<img src="myvideo.jpg" width="320" height="240" title="No video playback capabilities" />
+	</video>
+
+### 2. Option C: Multiple codecs with Flash fall-through when JavaScript is disabled
 
 This includes multiple codecs for various browsers (H.264 for IE and Safari, WebM for Chrome, Firefox 4, and Opera, Ogg for Firefox 3) as well as a Flash fallback for non HTML5 browsers with JavaScript disabled.
 
