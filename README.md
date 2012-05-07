@@ -47,7 +47,7 @@ This includes multiple codecs for various browsers (H.264 for IE and Safari, Web
 		</object>
 	</video>
 
-### 3. Kick back and enjoy the show!
+### 5. Kick back and enjoy the show!
 
 ## Advanced Techniques
 
